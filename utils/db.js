@@ -1,21 +1,21 @@
 const mongoose = require("mongoose");
-// const URI =  "mongodb://127.0.0.1:27017/mern_admin";
-
 
 const URI = process.env.MONGODB_URI;
-// mongoose.connect(URI);
 
 const connectDb = async () => {
     try {
+        if (!URI) {
+            throw new Error("MONGODB_URI is not defined");
+        }
+
         await mongoose.connect(URI);
+
         console.log("Connection successful to DB");
-        
-        
+
     } catch (error) {
-        console.log("Database Connection failed");
-        process.exit(0);
-        
+        console.error("Database Connection failed:", error.message);
+        throw error;
     }
-}
+};
 
 module.exports = connectDb;

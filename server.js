@@ -20,7 +20,7 @@ const errorMiddleware = require("./middleware/error-middleware");
 const corsOptions = {
     origin: [
         "http://localhost:5173",
-        "https://your-frontend.vercel.app"
+        "https://YOUR-FRONTEND.vercel.app"
     ],
     methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
     credentials: true,
@@ -39,18 +39,24 @@ app.get("/", (req, res) => {
     res.send("Backend is running successfully!");
 });
 
-// Main API Endpoints
+// API Routes
 app.use("/api/auth", authRouter);
 app.use("/api/form", contactRouter);
 app.use("/api/products", productRouter);
 app.use("/api/orders", orderRouter);
 app.use("/api/admin", adminRouter);
 
-// Error Handling Middleware
+// Error Handling
 app.use(errorMiddleware);
 
 // Connect Database
-connectDb();
+connectDb()
+    .then(() => {
+        console.log("Database connected successfully");
+    })
+    .catch((error) => {
+        console.error("Database connection error:", error);
+    });
 
 // Export app for Vercel
 module.exports = app;
