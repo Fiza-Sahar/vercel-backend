@@ -20,9 +20,9 @@ const errorMiddleware = require("./middleware/error-middleware");
 const corsOptions = {
     origin: [
         "http://localhost:5173",
-        "https://YOUR-FRONTEND.vercel.app"
+        "https://vercel-frontend-eosin-theta.vercel.app"
     ],
-    methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD"],
     credentials: true,
 };
 
